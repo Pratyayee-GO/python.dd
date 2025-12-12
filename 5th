@@ -8,7 +8,6 @@ def bubble_sort(arr):
                 swapped = True
         if not swapped:
             break
-
 arr = [64, 34, 25, 12, 22, 11, 90]
 print("Original array:", arr)
 bubble_sort(arr)
