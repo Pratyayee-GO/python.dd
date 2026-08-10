@@ -1,11 +1,33 @@
-def is_sorted(arr):
-    for i in range(len(arr) - 1):
-        if arr[i] > arr[i + 1]:
-            return False
-    return True
+class Solution:
+    def reverseKGroup(self, head, k):
+        dummy = ListNode(0)
+        dummy.next = head
 
-array1 = [1, 2, 3, 4, 5]
-array2 = [5, 3, 1, 2, 4]
+        group_prev = dummy
 
-print(is_sorted(array1))
-print(is_sorted(array2))
+        while True:
+            # Find the kth node
+            kth = group_prev
+            for _ in range(k):
+                kth = kth.next
+
+                # Not enough nodes left
+                if kth is None:
+                    return dummy.next
+
+            group_next = kth.next
+
+            # Reverse the group
+            prev = group_next
+            curr = group_prev.next
+
+            while curr != group_next:
+                temp = curr.next
+                curr.next = prev
+                prev = curr
+                curr = temp
+
+            # Connect previous part to reversed group
+            temp = group_prev.next
+            group_prev.next = kth
+            group_prev = temp
